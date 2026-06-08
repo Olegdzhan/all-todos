@@ -1,6 +1,7 @@
 import { memo, type SubmitEvent } from 'react';
 import { CREATE_TDO_FORM_IDS, ECreateTodoFormField, EFormName } from '@/forms';
-import { TextArea, TextInput } from '../../ui-kit/inputs';
+import { processCreateTodo } from '@/services/todo-service';
+import { TextArea, TextInput } from '@/view/ui-kit/inputs';
 import styles from './create-todo.module.css';
 
 export const CreateTodo = memo(() => {
@@ -10,8 +11,7 @@ export const CreateTodo = memo(() => {
       return;
     }
     const formData = new FormData(event.target);
-    const formPayload = Object.fromEntries(formData);
-    console.log(formPayload);
+    processCreateTodo(formData);
   };
 
   return (

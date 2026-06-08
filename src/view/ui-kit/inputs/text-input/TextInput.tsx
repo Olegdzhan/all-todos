@@ -17,7 +17,6 @@ export const TextInput = memo<TTextInputProps>(({
 }) => {
   return (
     <FieldLabel label={label} htmlFor={id}>
-      {label}
       <input
         className={styles.input}
         id={id}

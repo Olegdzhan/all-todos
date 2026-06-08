@@ -19,12 +19,6 @@
     "noUnusedParameters": true,
     "erasableSyntaxOnly": false,
     "noFallthroughCasesInSwitch": true,
-
-    /* aliases */
-    "baseUrl": "./",
-    "paths": {
-      "@/*": ["src/*"]
-    }
   },
   "include": ["vite.config.ts"]
 }
