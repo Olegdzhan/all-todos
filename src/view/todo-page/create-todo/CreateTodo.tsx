@@ -2,16 +2,15 @@ import { memo, type SubmitEvent } from 'react';
 import { CREATE_TDO_FORM_IDS, ECreateTodoFormField, EFormName } from '@/forms';
 import { processCreateTodo } from '@/services/todo-service';
 import { TextArea, TextInput } from '@/view/ui-kit/inputs';
+import { FlatButton, EFlatButtonType } from '@/view/ui-kit/buttons';
 import styles from './create-todo.module.css';
 
 export const CreateTodo = memo(() => {
+  console.log('Todo Form rendered');
+
   const handleSubmit = (event: SubmitEvent): void => {
     event.preventDefault();
-    if (!event.target) {
-      return;
-    }
-    const formData = new FormData(event.target);
-    processCreateTodo(formData);
+    processCreateTodo(event.target);
   };
 
   return (
@@ -31,7 +30,12 @@ export const CreateTodo = memo(() => {
         name={ECreateTodoFormField.Description}
         placeholder="В рамках задачи предполагается сделать..."
       />
-      <button className={styles.button} type="submit">Добавить</button>
+      <FlatButton
+        htmlType="submit"
+        type={EFlatButtonType.Primary}
+      >
+        Добавить
+      </FlatButton>
     </form>
   );
 });

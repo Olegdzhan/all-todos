@@ -3,9 +3,11 @@ import type { TTodoDto } from '@/dto';
 import { TodoStoreContext } from '@/view/ui-controllers';
 
 export const TodoList = memo(() => {
+  console.log('Todo List rendered');
+
   const todoState = use(TodoStoreContext);
 
-  const todos = useMemo(() => todoState.todos?.list ?? [], [todoState]);
+  const todos = useMemo(() => todoState.todos?.list ?? [], [todoState.todos]);
 
   return (
     <ul>

@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gateway — Cloud Platform</title>
+
+  <style>
+    :root {
+      --bg: #060816;
+      --bg-secondary: rgba(255,255,255,0.04);
+      --glass: rgba(255,255,255,0.08);
+      --glass-strong: rgba(255,255,255,0.12);
+
+      --text: #f4f7ff;
+      --muted: rgba(255,255,255,0.65);
+
+      --accent: #5ee7ff;
+      --accent-2: #8b7dff;
+
+      --border: rgba(255,255,255,0.12);
+      --shadow: 0 20px 80px rgba(0,0,0,0.45);
+
+      --radius: 28px;
+      --blur: blur(24px);
+
+      --transition: 240ms cubic-bezier(.2,.8,.2,1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      background:
+        radial-gradient(circle at top left, rgba(94,231,255,.18), transparent 25%),
+        radial-gradient(circle at bottom right, rgba(139,125,255,.18), transparent 30%),
+        linear-gradient(135deg, #040611 0%, #0a1023 100%);
+      color: var(--text);
+      font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 36px 36px;
+      pointer-events: none;
+      mask-image: radial-gradient(circle at center, black 45%, transparent 100%);
+    }
+
+    .liquid-orb {
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(60px);
+      opacity: .5;
+      z-index: 0;
+      animation: float 10s ease-in-out infinite;
+    }
+
+    .orb-1 {
+      width: 280px;
+      height: 280px;
+      background: #5ee7ff;
+      top: -80px;
+      left: -80px;
+    }
+
+    .orb-2 {
+      width: 340px;
+      height: 340px;
+      background: #8b7dff;
+      right: -100px;
+      top: 260px;
+      animation-delay: -3s;
+    }
+
+    .orb-3 {
+      width: 240px;
+      height: 240px;
+      background: #6bffb8;
+      bottom: -60px;
+      left: 30%;
+      animation-delay: -5s;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0px) translateX(0px);
+      }
+      50% {
+        transform: translateY(-20px) translateX(15px);
+      }
+    }
+
+    .container {
+      width: min(1200px, calc(100% - 32px));
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    header {
+      padding: 24px 0;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 22px;
+
+      background: var(--glass);
+      border: 1px solid var(--border);
+      backdrop-filter: var(--blur);
+
+      border-radius: 999px;
+      box-shadow: var(--shadow);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .logo-badge {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+
+      background:
+        linear-gradient(135deg, var(--accent), var(--accent-2));
+
+      box-shadow:
+        0 10px 30px rgba(94,231,255,.35);
+    }
+
+    .provider {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 460px;
+      gap: 40px;
+      align-items: center;
+      min-height: calc(100vh - 120px);
+      padding: 40px 0 80px;
+    }
+
+    .hero-text {
+      max-width: 640px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+
+      padding: 10px 16px;
+      border-radius: 999px;
+
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 28px;
+      backdrop-filter: blur(12px);
+    }
+
+    .pulse {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #6bffb8;
+      box-shadow: 0 0 12px #6bffb8;
+    }
+
+    h1 {
+      font-size: clamp(48px, 7vw, 92px);
+      line-height: .95;
+      letter-spacing: -0.06em;
+      margin-bottom: 28px;
+    }
+
+    .gradient-text {
+      background:
+        linear-gradient(135deg, #ffffff 0%, #9de9ff 40%, #9e91ff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .description {
+      font-size: 18px;
+      line-height: 1.7;
+      color: var(--muted);
+      max-width: 560px;
+      margin-bottom: 36px;
+    }
+
+    .cta-group {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      position: relative;
+      overflow: hidden;
+
+      border: none;
+      cursor: pointer;
+
+      padding: 16px 26px;
+      border-radius: 18px;
+
+      font-size: 15px;
+      font-weight: 600;
+
+      transition: var(--transition);
+    }
+
+    .btn-primary {
+      background:
+        linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #02050f;
+      box-shadow: 0 10px 30px rgba(94,231,255,.25);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.05);
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(16px);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px) scale(1.01);
+    }
+
+    .glass-card {
+      position: relative;
+
+      background: var(--glass);
+      border: 1px solid var(--border);
+
+      border-radius: var(--radius);
+
+      padding: 28px;
+
+      backdrop-filter: var(--blur);
+
+      box-shadow: var(--shadow);
+    }
+
+    .form-title {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .form-subtitle {
+      color: var(--muted);
+      margin-bottom: 28px;
+      line-height: 1.6;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .input-wrapper {
+      position: relative;
+    }
+
+    .input {
+      width: 100%;
+      padding: 18px 18px 18px 52px;
+
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.08);
+
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+
+      outline: none;
+
+      transition: var(--transition);
+      backdrop-filter: blur(12px);
+    }
+
+    .input::placeholder {
+      color: rgba(255,255,255,0.35);
+    }
+
+    .input:focus {
+      border-color: rgba(94,231,255,.45);
+      background: rgba(255,255,255,0.06);
+      box-shadow:
+        0 0 0 4px rgba(94,231,255,.08),
+        0 10px 40px rgba(94,231,255,.08);
+      transform: translateY(-1px);
+    }
+
+    .input-icon {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: .55;
+      font-size: 16px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      margin-top: 8px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 60px;
+    }
+
+    .stat {
+      padding: 22px;
+      border-radius: 22px;
+
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+
+      backdrop-filter: blur(14px);
+    }
+
+    .stat-value {
+      font-size: 30px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      margin-bottom: 6px;
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .notification {
+      position: fixed;
+      left: 50%;
+      bottom: 28px;
+      transform: translateX(-50%) translateY(30px);
+
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.1);
+
+      color: rgba(255,255,255,0.75);
+
+      padding: 14px 20px;
+      border-radius: 16px;
+
+      backdrop-filter: blur(18px);
+
+      opacity: 0;
+      pointer-events: none;
+
+      transition: var(--transition);
+
+      z-index: 999;
+      font-size: 14px;
+    }
+
+    .notification.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    footer {
+      padding: 40px 0 60px;
+      color: rgba(255,255,255,0.4);
+      font-size: 14px;
+      text-align: center;
+    }
+
+    @media (max-width: 980px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 20px;
+      }
+
+      .hero-text {
+        max-width: 100%;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav {
+        border-radius: 24px;
+      }
+
+      h1 {
+        font-size: 52px;
+      }
+
+      .description {
+        font-size: 16px;
+      }
+
+      .cta-group {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .glass-card {
+        padding: 22px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="liquid-orb orb-1"></div>
+<div class="liquid-orb orb-2"></div>
+<div class="liquid-orb orb-3"></div>
+
+<div class="container">
+
+  <header>
+    <nav class="nav">
+      <div class="logo">
+        <div class="logo-badge"></div>
+
+        <div>
+          <div>Gateway</div>
+          <div class="provider">powered by iteasy.pro</div>
+        </div>
+      </div>
+
+      <button class="btn btn-secondary">
+        Cloud Access
+      </button>
+    </nav>
+  </header>
+
+  <main class="hero">
+
+    <section class="hero-text">
+      <div class="eyebrow">
+        <div class="pulse"></div>
+        cloud infrastructure • gateway.iteasy.pro
+      </div>
+
+      <h1>
+          <span class="gradient-text">
+            Gateway
+          </span>
+        cloud platform
+      </h1>
+
+      <p class="description">
+        Современная облачная платформа нового поколения
+        для безопасного доступа к инфраструктуре, сервисам
+        и корпоративным данным с ultra-fast networking
+        и liquid-интерфейсом 2026 года.
+      </p>
+
+      <div class="cta-group">
+        <button class="btn btn-primary">
+          Start Platform
+        </button>
+
+        <button class="btn btn-secondary">
+          Documentation
+        </button>
+      </div>
+
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-value">99.99%</div>
+          <div class="stat-label">Cloud uptime</div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-value">24/7</div>
+          <div class="stat-label">Monitoring</div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-value">2026</div>
+          <div class="stat-label">Liquid design</div>
+        </div>
+      </div>
+    </section>
+
+    <aside class="glass-card">
+      <div class="form-title">
+        Access Request
+      </div>
+
+      <div class="form-subtitle">
+        Получите доступ к облачной платформе Gateway
+      </div>
+
+      <form id="gatewayForm">
+
+        <div class="form-group">
+          <div class="input-wrapper">
+            <span class="input-icon">✦</span>
+
+            <input
+              class="input"
+              type="text"
+              placeholder="Ваше имя"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="input-wrapper">
+            <span class="input-icon">@</span>
+
+            <input
+              class="input"
+              type="email"
+              placeholder="Email address"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="input-wrapper">
+            <span class="input-icon">⌘</span>
+
+            <input
+              class="input"
+              type="text"
+              placeholder="Название компании"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="input-wrapper">
+            <span class="input-icon">◉</span>
+
+            <input
+              class="input"
+              type="password"
+              placeholder="Cloud access key"
+              required
+            />
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          class="btn btn-primary submit-btn"
+        >
+          Connect to Gateway
+        </button>
+
+      </form>
+    </aside>
+
+  </main>
+
+  <footer>
+    © 2026 Gateway Cloud Platform — iteasy.pro
+  </footer>
+
+</div>
+
+<div class="notification" id="notification">
+  Ведутся технические работы, попробуйте позже
+</div>
+
+<script>
+  const form = document.getElementById('gatewayForm');
+  const notification = document.getElementById('notification');
+
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const button = form.querySelector('button[type="submit"]');
+
+    button.style.opacity = '0.7';
+    button.textContent = 'Processing...';
+
+    setTimeout(() => {
+      form.reset();
+
+      button.style.opacity = '1';
+      button.textContent = 'Connect to Gateway';
+
+      notification.classList.add('show');
+
+      setTimeout(() => {
+        notification.classList.remove('show');
+      }, 3200);
+
+    }, 700);
+  });
+
+  // liquid hover effect
+  const interactiveElements = document.querySelectorAll(
+    '.btn, .glass-card, .input'
+  );
+
+  interactiveElements.forEach(el => {
+    el.addEventListener('mousemove', e => {
+      const rect = el.getBoundingClientRect();
+
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      el.style.background =
+        `radial-gradient(circle at ${x}px ${y}px,
+          rgba(255,255,255,0.12),
+          rgba(255,255,255,0.04) 40%)`;
+    });
+
+    el.addEventListener('mouseleave', () => {
+      el.style.background = '';
+    });
+  });
+</script>
+
+</body>
+</html>

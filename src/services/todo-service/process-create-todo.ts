@@ -2,11 +2,15 @@ import { TodoApi } from '@/api';
 import { CreateTodoAdapter } from '@/forms';
 import { ETodoStoreEvents, todoStore } from '@/store';
 
-export async function processCreateTodo(createTodoFormData: FormData): Promise<void> {
+export async function processCreateTodo(formTarget: HTMLFormElement | undefined): Promise<void> {
+  if (!formTarget) {
+    return;
+  }
+  const formData = new FormData(formTarget);
   todoStore.act(ETodoStoreEvents.SetError, null);
   todoStore.act(ETodoStoreEvents.SetLoading, true);
   try {
-    const payload = CreateTodoAdapter.formToPayload(createTodoFormData);
+    const payload = CreateTodoAdapter.formToPayload(formData);
     await TodoApi.createTodo(payload);
     const res = await TodoApi.getTodos();
     todoStore.act(ETodoStoreEvents.SetTodos, res);

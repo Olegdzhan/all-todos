@@ -1,5 +1,8 @@
 import { TodoPage } from './view/todo-page';
+import styles from './app.module.css';
 
 export const App = () => (
-  <TodoPage />
+  <section className={styles.container}>
+    <TodoPage />
+  </section>
 );

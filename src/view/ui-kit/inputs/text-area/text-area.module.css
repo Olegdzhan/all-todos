@@ -1,21 +1,29 @@
 .textarea {
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  display: block;
-  font-size: 16px;
-  font-weight: 300;
-  outline: none;
-  padding: 2px 4px;
-  color: var(--text-h);
-  overflow-y: auto;
   width: 100%;
+  padding: 18px 18px 18px 52px;
+
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.08);
+
+  background: rgba(255,255,255,0.04);
+  color: var(--text);
+
+  outline: none;
+  overflow-y: auto;
+
+  transition: var(--transition);
+  backdrop-filter: blur(12px);
 }
 
 .textarea::placeholder {
-  font-size: 16px;
-  font-style: italic;
+  color: rgba(255,255,255,0.35);
 }
 
 .textarea:focus {
-  border-color: var(--accent-border);
+  border-color: rgba(94,231,255,.45);
+  background: rgba(255,255,255,0.06);
+  box-shadow:
+    0 0 0 4px rgba(94,231,255,.08),
+    0 10px 40px rgba(94,231,255,.08);
+  transform: translateY(-1px);
 }
