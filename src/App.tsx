@@ -1,9 +1,5 @@
-import { CreateTodo } from './create-todo';
-import { TodoList } from './todo-list';
+import { TodoPage } from './framework/todo-page';
 
 export const App = () => (
-  <>
-    <CreateTodo />
-    <TodoList />
-  </>
+  <TodoPage />
 );

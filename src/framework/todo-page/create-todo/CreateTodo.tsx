@@ -1,4 +1,6 @@
 import { memo, type SubmitEvent } from 'react';
+import { CREATE_TDO_FORM_IDS, ECreateTodoFormField, EFormName } from '@/forms';
+import { TextInput } from '../../../framework/ui-kit/inputs';
 import styles from './create-todo.module.css';
 
 export const CreateTodo = memo(() => {
@@ -15,17 +17,22 @@ export const CreateTodo = memo(() => {
   return (
     <form
       className={styles.form}
-      name="createTodoForm"
+      name={EFormName.CreateTodo}
       onSubmit={handleSubmit}
     >
-      <label className={styles.label} htmlFor="taskTitleField">
-        Название задачи
-        <input
-          className={styles.input}
-          id="taskTitleField"
-          name="taskTitleField"
-          placeholder="Сделать много дел"
-          type="text"
+      <TextInput
+        id={CREATE_TDO_FORM_IDS.Title}
+        label="Название задачи"
+        name={ECreateTodoFormField.Title}
+      />
+      <label className={styles.label} htmlFor={CREATE_TDO_FORM_IDS.Description}>
+        Описание задачи
+        <textarea
+          className={styles.textarea}
+          id={CREATE_TDO_FORM_IDS.Description}
+          name={ECreateTodoFormField.Description}
+          placeholder="В рамках задачи предполагается сделать..."
+          rows={5}
         />
       </label>
       <button className={styles.button} type="submit">Добавить</button>
