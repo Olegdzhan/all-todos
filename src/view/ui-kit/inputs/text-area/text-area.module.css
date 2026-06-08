@@ -1,0 +1,21 @@
+.textarea {
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  display: block;
+  font-size: 16px;
+  font-weight: 300;
+  outline: none;
+  padding: 2px 4px;
+  color: var(--text-h);
+  overflow-y: auto;
+  width: 100%;
+}
+
+.textarea::placeholder {
+  font-size: 16px;
+  font-style: italic;
+}
+
+.textarea:focus {
+  border-color: var(--accent-border);
+}

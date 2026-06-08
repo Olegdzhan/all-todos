@@ -1,4 +1,4 @@
-import { TodoPage } from './framework/todo-page';
+import { TodoPage } from './view/todo-page';
 
 export const App = () => (
   <TodoPage />

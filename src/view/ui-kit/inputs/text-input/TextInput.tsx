@@ -1,4 +1,5 @@
 import { memo } from 'react';
+import { FieldLabel } from '../../labels';
 import styles from './text-input.module.css';
 
 type TTextInputProps = {
@@ -15,7 +16,7 @@ export const TextInput = memo<TTextInputProps>(({
   placeholder,
 }) => {
   return (
-    <label className={styles.label} htmlFor={id}>
+    <FieldLabel label={label} htmlFor={id}>
       {label}
       <input
         className={styles.input}
@@ -24,6 +25,6 @@ export const TextInput = memo<TTextInputProps>(({
         placeholder={placeholder}
         type="text"
       />
-    </label>
+    </FieldLabel>
   );
 })
