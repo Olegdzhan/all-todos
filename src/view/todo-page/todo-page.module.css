@@ -1,0 +1,8 @@
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 460px;
+  gap: 40px;
+  align-items: center;
+  min-height: calc(100vh - 120px);
+  padding: 40px 0;
+}
