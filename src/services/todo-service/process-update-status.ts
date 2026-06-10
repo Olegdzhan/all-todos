@@ -14,7 +14,7 @@ export const processUpdateTaskStatus = async (
   };
   try {
     await TodoApi.updateStatus(payload);
-    const res = TodoApi.getTodos();
+    const res = await TodoApi.getTodos();
     todoStore.act(ETodoStoreEvents.SetTodos, res);
   } catch (err: any) {
     todoStore.act(ETodoStoreEvents.SetError, err?.message ?? err);

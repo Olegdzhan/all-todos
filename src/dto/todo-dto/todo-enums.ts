@@ -1,7 +1,7 @@
 export enum ETodoStatus {
-  Complete,
-  InProgress,
-  Open,
+  Complete = 'complete',
+  InProgress = 'in_progress',
+  Open = 'open',
 }
 
 export enum ETodoTaskStatusMove {

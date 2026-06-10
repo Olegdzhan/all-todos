@@ -12,4 +12,5 @@ TODO_STATUS_ORDER_MAP.forEach((value: number, key: ETodoStatus) => {
   TODO_STATUS_LINE[value] = key;
 });
 
+export const MIN_STATUS_ORDER = TODO_STATUS_ORDER_MAP.get(ETodoStatus.Open)!;
 export const MAX_STATUS_ORDER = TODO_STATUS_ORDER_MAP.get(ETodoStatus.Complete)!;

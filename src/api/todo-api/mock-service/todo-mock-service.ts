@@ -1,5 +1,5 @@
 import { ETodoStatus, type TTodoDto } from '@/dto';
-import { moveStatus } from './todo-mock-server-utils';
+import { moveStatus } from '@/utils/task-status-utils';
 
 export class TodoMockService {
   private _todos: TTodoDto.TTodoElementDto[] = [];

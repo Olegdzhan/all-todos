@@ -1,9 +1,10 @@
 import { ETodoStatus, ETodoTaskStatusMove } from '@/dto';
 import {
   MAX_STATUS_ORDER,
+  MIN_STATUS_ORDER,
   TODO_STATUS_LINE,
   TODO_STATUS_ORDER_MAP,
-} from './todo-mock-server-constants';
+} from '@/domain/bpm';
 
 export const moveStatus = (
   status: ETodoStatus,
@@ -24,7 +25,7 @@ export const moveStatus = (
     default:
       nextPosition = -1;
   }
-  if (nextPosition < 0 || nextPosition > MAX_STATUS_ORDER) {
+  if (nextPosition < MIN_STATUS_ORDER || nextPosition > MAX_STATUS_ORDER) {
     return  null;
   }
   return TODO_STATUS_LINE[nextPosition]!;

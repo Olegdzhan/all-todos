@@ -2,6 +2,7 @@ import { memo, use, useMemo } from 'react';
 import type { TTodoDto } from '@/dto';
 import { TodoStoreContext } from '@/view/ui-controllers';
 import { Loadable } from '@/view/ui-kit';
+import { TodoIdContext } from '../context';
 import { TodoListElement } from './TodoListElement';
 import styles from './todo-list-widget.module.css';
 
@@ -18,12 +19,13 @@ export const TodoListWidget = memo(() => {
       loading={isLoading}
     >
       {todos.map((todo: TTodoDto.TTodoElementDto) => (
-        <TodoListElement
-          key={todo.id}
-          description={todo.description}
-          status={todo.status}
-          title={todo.title}
-        />
+        <TodoIdContext key={todo.id} value={todo.id}>
+          <TodoListElement
+            description={todo.description}
+            status={todo.status}
+            title={todo.title}
+          />
+        </TodoIdContext>
       ))}
     </Loadable>
   );

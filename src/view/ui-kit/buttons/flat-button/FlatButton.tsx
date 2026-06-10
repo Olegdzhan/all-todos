@@ -1,4 +1,8 @@
-import { memo, type ReactNode } from 'react';
+import {
+  memo,
+  type ReactNode,
+  type MouseEvent,
+} from 'react';
 import cn from 'classnames';
 import { EFlatButtonType } from './flat-button-enums';
 import styles from './flat-button.module.css';
@@ -8,6 +12,7 @@ type TFlatButtonProps = {
   disabled?: boolean;
   htmlType: 'button' | 'submit';
   loading?: boolean;
+  onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
   type?: EFlatButtonType;
 };
 
@@ -16,6 +21,7 @@ export const FlatButton = memo<TFlatButtonProps>(({
   disabled,
   htmlType,
   loading,
+  onClick,
   type = EFlatButtonType.Default,
 }) => {
   const calculatedClasses = cn(
@@ -28,6 +34,7 @@ export const FlatButton = memo<TFlatButtonProps>(({
     <button
       className={calculatedClasses}
       disabled={disabled || loading}
+      onClick={onClick}
       type={htmlType}
     >
       {children}

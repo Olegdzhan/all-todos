@@ -13,8 +13,6 @@ export const CreateTodoForm = memo(() => {
 
   const isLoading = use(TodoStoreContext).loading;
 
-  console.log('CreateTodoForm render', 'isLoading', isLoading);
-
   return (
     <form
       className={styles.form}
