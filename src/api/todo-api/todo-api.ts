@@ -17,4 +17,9 @@ export class TodoApi {
     const result = todoMockService.updateTodo(payload);
     return delayedPromise(350, result);
   }
+
+  static updateStatus(payload: TTodoDto.TUpdateTaskStatusInDto): Promise<TTodoDto.TTodoElementDto> {
+    const result = todoMockService.updateTaskStatus(payload);
+    return delayedPromise(200, result);
+  }
 }

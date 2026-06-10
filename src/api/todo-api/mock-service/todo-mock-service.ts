@@ -1,4 +1,5 @@
 import { ETodoStatus, type TTodoDto } from '@/dto';
+import { moveStatus } from './todo-mock-server-utils';
 
 export class TodoMockService {
   private _todos: TTodoDto.TTodoElementDto[] = [];
@@ -24,5 +25,18 @@ export class TodoMockService {
     const updatedTodo = { ...this._todos[foundIndex], ...payload };
     this._todos[foundIndex] = updatedTodo;
     return updatedTodo;
+  }
+
+  updateTaskStatus(payload: TTodoDto.TUpdateTaskStatusInDto): TTodoDto.TTodoElementDto {
+    const todo = this._todos.find((el: TTodoDto.TTodoElementDto): boolean => el.id === payload.id);
+    if (!todo) {
+      throw new Error(`There is no task with id: ${payload.id}`);
+    }
+    const status = moveStatus(todo.status, payload.statusMove);
+    if (status === null) {
+      throw new Error(`Status ${todo.status} could not be updated by direction ${payload.statusMove}`);
+    }
+    todo.status = status;
+    return todo;
   }
 }
