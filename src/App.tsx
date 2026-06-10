@@ -1,4 +1,4 @@
-import { TodoPage } from './view/todo-page';
+import { TodoPage } from './view/pages/todo-page';
 import styles from './app.module.css';
 
 export const App = () => (

@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import { TodoStoreProvider } from '@/view/ui-controllers';
-import { CreateTodo } from './create-todo';
+import { TodoFormWidget } from '@/view/widgets/todo-form-widget';
 import { TodoList } from './todo-list';
 import styles from './todo-page.module.css';
 
@@ -13,7 +13,7 @@ export const TodoPage = memo(() => {
         <div>
           <h1>Заглушка</h1>
         </div>
-        <CreateTodo />
+        <TodoFormWidget />
       </section>
       <TodoList />
     </TodoStoreProvider>
