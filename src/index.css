@@ -9,6 +9,9 @@
 
   --accent: #5ee7ff;
   --accent-2: #8b7dff;
+  --success: #6bffb8;
+  --warning: #ffbe5c;
+  --error: #ff708f;
 
   --border: rgba(255,255,255,0.12);
   --shadow: 0 20px 80px rgba(0,0,0,0.45);
@@ -23,6 +26,10 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+ul, ol {
+  list-style-type: none;
 }
 
 html {
@@ -59,3 +66,4 @@ body::before {
   pointer-events: none;
   mask-image: radial-gradient(circle at center, black 45%, transparent 100%);
 }
+

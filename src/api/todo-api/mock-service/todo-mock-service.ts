@@ -1,4 +1,4 @@
-import type { TTodoDto } from '@/dto';
+import { ETodoStatus, type TTodoDto } from '@/dto';
 
 export class TodoMockService {
   private _todos: TTodoDto.TTodoElementDto[] = [];
@@ -13,7 +13,7 @@ export class TodoMockService {
     const todoElement = {
       ...payload,
       id: String(Date.now()),
-      done: false,
+      status: ETodoStatus.Open,
     };
     this._todos.push(todoElement);
     return todoElement;

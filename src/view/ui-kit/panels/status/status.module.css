@@ -1,0 +1,39 @@
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: var(--muted);
+  font-size: 14px;
+  margin-bottom: 28px;
+  backdrop-filter: blur(12px);
+}
+
+.pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.success {
+  background: var(--success);
+  box-shadow: 0 0 12px var(--success);
+}
+
+.warning {
+  background: var(--warning);
+  box-shadow: 0 0 12px var(--warning);
+}
+
+.error {
+  background: var(--error);
+  box-shadow: 0 0 12px var(--error);
+}
+
+.info {
+  background: var(--accent);
+  box-shadow: 0 0 12px var(--accent);
+}

@@ -1,1 +1,1 @@
-export { TodoStoreContext, TodoStoreProvider } from './todo-controller';
+export { TodoStoreContext, TodoStoreProvider, useTodoStore } from './todo-controller';

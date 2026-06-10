@@ -1,10 +1,9 @@
 import { memo, use, useMemo } from 'react';
 import type { TTodoDto } from '@/dto';
 import { TodoStoreContext } from '@/view/ui-controllers';
+import { TodoListElement } from './TodoListElement';
 
 export const TodoList = memo(() => {
-  console.log('Todo List rendered');
-
   const todoState = use(TodoStoreContext);
 
   const todos = useMemo(() => todoState.todos?.list ?? [], [todoState.todos]);
@@ -12,11 +11,11 @@ export const TodoList = memo(() => {
   return (
     <ul>
       {todos.map((todo: TTodoDto.TTodoElementDto) => (
-        <li key={todo.id}>
-          <h3>{todo.title}</h3>
-          <p>{todo.description}</p>
-          <p>{todo.done ? 'Сделано' : 'Не сделано'}</p>
-        </li>
+        <TodoListElement
+          description={todo.description}
+          status={todo.status}
+          title={todo.title}
+        />
       ))}
     </ul>
   );

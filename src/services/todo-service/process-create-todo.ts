@@ -14,6 +14,7 @@ export async function processCreateTodo(formTarget: HTMLFormElement | undefined)
     await TodoApi.createTodo(payload);
     const res = await TodoApi.getTodos();
     todoStore.act(ETodoStoreEvents.SetTodos, res);
+    formTarget.reset();
   } catch (err: any) {
     todoStore.act(ETodoStoreEvents.SetError, err?.message ?? err);
   } finally {
