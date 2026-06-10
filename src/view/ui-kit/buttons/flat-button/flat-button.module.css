@@ -1,16 +1,12 @@
 .btn {
   position: relative;
   overflow: hidden;
-
   border: none;
   cursor: pointer;
-
   padding: 16px 26px;
   border-radius: 18px;
-
   font-size: 15px;
   font-weight: 600;
-
   transition: var(--transition);
 }
 
@@ -36,15 +32,12 @@
   opacity: 0.55;
   cursor: not-allowed;
   pointer-events: none;
-
   color: rgba(255, 255, 255, 0.55);
   background: rgba(255, 255, 255, 0.05);
-
   border: 1px solid rgba(255, 255, 255, 0.06);
   box-shadow: none;
   transform: none;
   filter: grayscale(0.2);
-
   transition: var(--transition);
 }
 
@@ -53,4 +46,49 @@
 .btn:disabled:active {
   transform: none;
   box-shadow: none;
+}
+
+/* Loading state */
+.btn.loading:disabled,
+.btn[aria-busy="true"]:disabled {
+  position: relative;
+  cursor: wait;
+  pointer-events: none;
+  color: rgba(255,255,255,.85);
+  background:
+    linear-gradient(
+      135deg,
+      rgba(94,231,255,.18),
+      rgba(139,125,255,.18)
+    );
+  border: 1px solid rgba(94,231,255,.25);
+  box-shadow:
+    0 0 20px rgba(94,231,255,.12),
+    inset 0 0 20px rgba(255,255,255,.04);
+  transform: none;
+}
+
+/* shimmer effect */
+.btn.loading:disabled::after,
+.btn[aria-busy="true"]:disabled::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      110deg,
+      transparent 20%,
+      rgba(255,255,255,.15) 50%,
+      transparent 80%
+    );
+  animation: button-loading 1.5s linear infinite;
+}
+
+@keyframes button-loading {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
 }

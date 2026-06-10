@@ -7,6 +7,7 @@ type TFlatButtonProps = {
   children: ReactNode;
   disabled?: boolean;
   htmlType: 'button' | 'submit';
+  loading?: boolean;
   type?: EFlatButtonType;
 };
 
@@ -14,14 +15,19 @@ export const FlatButton = memo<TFlatButtonProps>(({
   children,
   disabled,
   htmlType,
+  loading,
   type = EFlatButtonType.Default,
 }) => {
-  const calculatedClasses = cn(styles.btn, styles[type]);
+  const calculatedClasses = cn(
+    styles.btn,
+    styles[type],
+    { [styles.loading]: loading },
+  );
 
   return (
     <button
       className={calculatedClasses}
-      disabled={disabled}
+      disabled={disabled || loading}
       type={htmlType}
     >
       {children}

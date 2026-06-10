@@ -1,0 +1,47 @@
+.container {
+  position: relative;
+}
+
+.loading::before {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  content: "Загружаю данные...";
+  width: 100%;
+  height: 100%;
+  min-height: 60px;
+  color: rgba(255,255,255,.85);
+  background:
+    linear-gradient(
+      135deg,
+      rgba(94,231,255,.18),
+      rgba(139,125,255,.18)
+    );
+}
+
+.loading::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  background:
+    linear-gradient(
+      110deg,
+      transparent 20%,
+      rgba(255,255,255,.15) 50%,
+      transparent 80%
+    );
+  animation: loading 1.5s linear infinite;
+}
+
+@keyframes loading {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
