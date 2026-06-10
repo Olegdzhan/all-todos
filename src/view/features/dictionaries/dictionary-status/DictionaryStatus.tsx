@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { dictionaries, EDictionaryName } from '@/utils/dictionaries';
+import { dictionaries, EDictionaryName } from '@/services/dictionary-service';
 import { EStatusType, Status } from '@/view/ui-kit';
 
 type TDictionaryStatusProps = {

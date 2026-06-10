@@ -19,6 +19,5 @@ export async function processCreateTodo(formTarget: HTMLFormElement | undefined)
     todoStore.act(ETodoStoreEvents.SetError, err?.message ?? err);
   } finally {
     todoStore.act(ETodoStoreEvents.SetLoading, false);
-    console.log(todoStore.state);
   }
 }

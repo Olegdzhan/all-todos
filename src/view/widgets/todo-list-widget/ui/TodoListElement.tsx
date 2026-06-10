@@ -1,9 +1,9 @@
 import { memo } from 'react';
 import { ETodoStatus } from '@/dto';
-import { EDictionaryName } from '@/utils/dictionaries';
+import { EDictionaryName } from '@/services/dictionary-service';
 import { Card, Text } from '@/view/ui-kit';
 import { DictionaryStatus } from '@/view/features/dictionaries';
-import { STATUS_TYPE_MAP } from './todo-list-element-constants';
+import { STATUS_TYPE_MAP } from '../values';
 import styles from './todo-list-element.module.css';
 
 type TTodoListElementProps = {

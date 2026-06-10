@@ -1,1 +1,1 @@
-export { TodoFormWidget } from './TodoFormWidget';
+export { TodoFormWidget } from './ui';

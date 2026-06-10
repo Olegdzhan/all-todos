@@ -1,7 +1,6 @@
 import { memo } from 'react';
-import { CreateTodoForm } from '../../features/forms';
-import { Card, ECardType } from '../../ui-kit/panels';
-import { Text } from '../../ui-kit/labels';
+import { CreateTodoForm } from '@/view/features/forms';
+import { Card, ECardType, Text } from '@/view/ui-kit';
 import styles from './todo-form-widget.module.css';
 
 export const TodoFormWidget = memo(() => {
