@@ -5,22 +5,27 @@ import {
 } from './loading-store-values';
 
 export class LoadingStoreOperator {
+  private static _removeOne(state: TLoadingState, id: string): TLoadingState {
+    if (id in state) {
+      delete state[id];
+      return { ...state };
+    }
+    return state;
+  }
+
   static clearAll(_: TLoadingState): TLoadingState {
     return {} as TLoadingState;
   }
 
   static clearLoading(state: TLoadingState, ids: string[] | string): TLoadingState {
     if (Array.isArray(ids)) {
+      const startStateLength = Object.keys(state).length;
       ids.forEach((id: string) => {
-        delete state[id];
+        state = LoadingStoreOperator._removeOne(state, id);
       });
-      return { ...state };
+      return startStateLength === Object.keys(state).length ? state : { ...state };
     }
-    if (<string>ids in state) {
-      delete state[<string>ids];
-      return { ...state };
-    }
-    return state;
+    return LoadingStoreOperator._removeOne(state, ids);
   }
 
   static setLoading(

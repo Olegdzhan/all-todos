@@ -1,15 +1,15 @@
-import { memo, type ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import cn from 'classnames';
 import styles from './loadable.module.css';
 
 type TLoadableProps = {
   as?: 'section' | 'aside' | 'div' | 'ul';
-  children: ReactNode;
+  children?: ReactNode;
   className?: string;
-  loading: boolean;
+  loading: string | boolean;
 };
 
-export const Loadable = memo(({
+export const Loadable = ({
   as: Tag = 'div',
   children,
   className,
@@ -21,9 +21,11 @@ export const Loadable = memo(({
     className,
   );
 
+  const beforeContent = typeof loading === 'string' ? loading : 'Загрузка...';
+
   return (
-    <Tag className={classes}>
+    <Tag className={classes} data-before-content={beforeContent}>
       {children}
     </Tag>
   );
-});
+};

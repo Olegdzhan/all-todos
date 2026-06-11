@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { LOADERS_IDS } from '@/application/loaders';
 import type { TTodoDto } from '@/dto';
 import { loadingStore, todoStore } from '@/store';
 import { useStore } from '@/view/ui-controllers';
@@ -12,13 +13,13 @@ export const TodoListSection = () => {
   const loadingState = useStore(loadingStore);
 
   const todos = useMemo(() => todoState.todos?.list ?? [], [todoState.todos]);
-  const isLoading = Object.keys(loadingState).length > 0;
+  const loadingMessage = loadingState[LOADERS_IDS.GET_TODO_LIST];
 
   return (
     <Loadable
       as="ul"
       className={styles.list}
-      loading={isLoading}
+      loading={loadingMessage}
     >
       {todos.map((todo: TTodoDto.TTodoElementDto) => (
         <TodoIdContext key={todo.id} value={todo.id}>

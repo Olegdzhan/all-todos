@@ -1,5 +1,6 @@
 import { memo, type SubmitEvent } from 'react';
 import { CREATE_TDO_FORM_IDS, ECreateTodoFormField, EFormName } from '@/application/forms';
+import { LOADERS_IDS } from '@/application/loaders';
 import { processCreateTodo } from '@/services/todo-service';
 import { loadingStore } from '@/store';
 import { useStore } from '@/view/ui-controllers';
@@ -33,7 +34,7 @@ export const CreateTodoForm = memo(() => {
       />
       <FlatButton
         htmlType="submit"
-        loading={Object.keys(loadingState).length > 0}
+        loading={Boolean(loadingState[LOADERS_IDS.CREATE_TASK])}
         type={EFlatButtonType.Primary}
       >
         Добавить

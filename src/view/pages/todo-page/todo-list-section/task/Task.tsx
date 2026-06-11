@@ -1,6 +1,9 @@
 import { memo, use } from 'react';
+import { LOADERS_IDS } from '@/application/loaders';
 import { ETaskStatus } from '@/domain/task-status';
 import { EDictionaryName } from '@/services/dictionary-service';
+import { loadingStore } from '@/store';
+import { useStore } from '@/view/ui-controllers';
 import { Card, Text } from '@/view/ui-kit';
 import { DictionaryStatus } from '@/view/shared/dictionaries';
 import { UpdateStatusButtonGroup } from '../update-status-button-group';
@@ -21,8 +24,16 @@ export const Task = memo<TTodoListElementProps>(({
 }) => {
   const id = use(TodoIdContext);
 
+  const loadingState = useStore(loadingStore);
+
+  const loadingMessage = loadingState[LOADERS_IDS.UPDATE_STATUS$(id)];
+
   return (
-    <Card as="li" className={styles.element}>
+    <Card
+      as="li"
+      className={styles.element}
+      loading={loadingMessage}
+    >
       <div className={styles.firstLine}>
         <Text as="h3">{title}</Text>
         <DictionaryStatus

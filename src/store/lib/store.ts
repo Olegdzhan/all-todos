@@ -18,11 +18,9 @@ export class Store<S> {
     } else {
       console.warn(`Store: Event ${String(eventName)} not found, or you try to call it before it has been registered`);
     }
-    if (this._subscriptions.size > 0) {
-      this._subscriptions.forEach((frameworkUpdater: () => void): void => {
-        frameworkUpdater();
-      });
-    }
+    this._subscriptions.forEach((frameworkUpdater: () => void): void => {
+      frameworkUpdater();
+    });
     return this;
   }
 
