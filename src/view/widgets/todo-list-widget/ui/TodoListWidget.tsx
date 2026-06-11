@@ -1,13 +1,14 @@
-import { memo, use, useMemo } from 'react';
+import { useMemo } from 'react';
 import type { TTodoDto } from '@/dto';
-import { TodoStoreContext } from '@/view/ui-controllers';
+import { todoStore } from '@/store';
+import { useStore } from '@/view/ui-controllers';
 import { Loadable } from '@/view/ui-kit';
 import { TodoIdContext } from '../context';
 import { TodoListElement } from './TodoListElement';
 import styles from './todo-list-widget.module.css';
 
-export const TodoListWidget = memo(() => {
-  const todoState = use(TodoStoreContext);
+export const TodoListWidget = () => {
+  const todoState = useStore(todoStore);
 
   const todos = useMemo(() => todoState.todos?.list ?? [], [todoState.todos]);
   const isLoading = todoState.loading;
@@ -29,4 +30,4 @@ export const TodoListWidget = memo(() => {
       ))}
     </Loadable>
   );
-});
+};

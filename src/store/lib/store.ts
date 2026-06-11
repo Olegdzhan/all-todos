@@ -3,10 +3,7 @@ import type { TPredicate } from './store-types';
 export class Store<S> {
   private readonly _events: Map<string | number | symbol, TPredicate<S>> = new Map();
 
-  private _subscription?: {
-    id: string;
-    updater: (state: S) => void;
-  };
+  private _subscriptions = new Map<string, () => void>();
 
   constructor(private _state: S) {}
 
@@ -21,7 +18,11 @@ export class Store<S> {
     } else {
       console.warn(`Store: Event ${String(eventName)} not found, or you try to call it before it has been registered`);
     }
-    this._subscription?.updater(this._state);
+    if (this._subscriptions.size > 0) {
+      this._subscriptions.forEach((frameworkUpdater: () => void): void => {
+        frameworkUpdater();
+      });
+    }
     return this;
   }
 
@@ -35,16 +36,15 @@ export class Store<S> {
     return this;
   }
 
-  subscribe(frameworkUpdater: (state: S) => void): string {
+  subscribe(frameworkUpdater: () => void): string {
     const id = String(Date.now());
-    this._subscription = { id, updater: frameworkUpdater };
+    this._subscriptions.set(id, frameworkUpdater);
     return id;
   }
 
-  unsubscribe(id: string): Store<S> {
-    if (this._subscription?.id === id) {
-      delete this._subscription;
+  unsubscribe(id: string): void {
+    if (this._subscriptions.has(id)) {
+      this._subscriptions.delete(id);
     }
-    return this;
   }
 }

@@ -1,1 +1,1 @@
-export { createReactStore } from './create-react-store';
+export { useStore } from './use-store';
