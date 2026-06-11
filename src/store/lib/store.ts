@@ -1,9 +1,14 @@
-import type { TPredicate } from './store-types';
+import type { IStore } from './store-interfaces'
+import type {
+  TFrameworkUpdaterFn,
+  TPredicate,
+  TStoreSubscriptionId,
+} from './store-types';
 
-export class Store<S> {
+export class Store<S> implements IStore<S> {
   private readonly _events: Map<string | number | symbol, TPredicate<S>> = new Map();
 
-  private _subscriptions = new Map<string, () => void>();
+  private readonly _subscriptions = new Map<symbol, TFrameworkUpdaterFn>();
 
   constructor(private _state: S) {}
 
@@ -18,7 +23,7 @@ export class Store<S> {
     } else {
       console.warn(`Store: Event ${String(eventName)} not found, or you try to call it before it has been registered`);
     }
-    this._subscriptions.forEach((frameworkUpdater: () => void): void => {
+    this._subscriptions.forEach((frameworkUpdater: TFrameworkUpdaterFn): void => {
       frameworkUpdater();
     });
     return this;
@@ -34,13 +39,13 @@ export class Store<S> {
     return this;
   }
 
-  subscribe(frameworkUpdater: () => void): string {
-    const id = String(Date.now());
+  subscribe(frameworkUpdater: TFrameworkUpdaterFn): TStoreSubscriptionId {
+    const id = Symbol(Date.now());
     this._subscriptions.set(id, frameworkUpdater);
     return id;
   }
 
-  unsubscribe(id: string): void {
+  unsubscribe(id: TStoreSubscriptionId): void {
     if (this._subscriptions.has(id)) {
       this._subscriptions.delete(id);
     }
