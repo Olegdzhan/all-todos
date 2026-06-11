@@ -1,17 +1,18 @@
 import { useMemo } from 'react';
 import type { TTodoDto } from '@/dto';
-import { todoStore } from '@/store';
+import { loadingStore, todoStore } from '@/store';
 import { useStore } from '@/view/ui-controllers';
 import { Loadable } from '@/view/ui-kit';
 import { TodoIdContext } from './contexts';
-import { Task } from './task/Task';
+import { Task } from './task';
 import styles from './todo-list-section.module.css';
 
 export const TodoListSection = () => {
   const todoState = useStore(todoStore);
+  const loadingState = useStore(loadingStore);
 
   const todos = useMemo(() => todoState.todos?.list ?? [], [todoState.todos]);
-  const isLoading = todoState.loading;
+  const isLoading = Object.keys(loadingState).length > 0;
 
   return (
     <Loadable

@@ -1,7 +1,7 @@
 import { memo, type SubmitEvent } from 'react';
 import { CREATE_TDO_FORM_IDS, ECreateTodoFormField, EFormName } from '@/application/forms';
 import { processCreateTodo } from '@/services/todo-service';
-import { todoStore } from '@/store';
+import { loadingStore } from '@/store';
 import { useStore } from '@/view/ui-controllers';
 import { EFlatButtonType, FlatButton, TextArea, TextInput } from '@/view/ui-kit';
 import styles from './create-todo-form.module.css';
@@ -12,7 +12,7 @@ export const CreateTodoForm = memo(() => {
     processCreateTodo(event.target);
   };
 
-  const todoState = useStore(todoStore);
+  const loadingState = useStore(loadingStore);
 
   return (
     <form
@@ -33,7 +33,7 @@ export const CreateTodoForm = memo(() => {
       />
       <FlatButton
         htmlType="submit"
-        loading={todoState.loading}
+        loading={Object.keys(loadingState).length > 0}
         type={EFlatButtonType.Primary}
       >
         Добавить
