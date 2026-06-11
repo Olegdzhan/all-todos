@@ -4,7 +4,7 @@ import {
   MIN_STATUS_ORDER,
   TODO_STATUS_LINE,
   TODO_STATUS_ORDER_MAP,
-} from '../../domain/task-status';
+} from '@/domain/task-status';
 
 export const moveStatus = (
   status: ETaskStatus,

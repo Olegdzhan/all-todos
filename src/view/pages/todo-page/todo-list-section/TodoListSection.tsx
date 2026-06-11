@@ -3,11 +3,11 @@ import type { TTodoDto } from '@/dto';
 import { todoStore } from '@/store';
 import { useStore } from '@/view/ui-controllers';
 import { Loadable } from '@/view/ui-kit';
-import { TodoIdContext } from '../context';
-import { TodoListElement } from './TodoListElement';
-import styles from './todo-list-widget.module.css';
+import { TodoIdContext } from './contexts';
+import { Task } from './task/Task';
+import styles from './todo-list-section.module.css';
 
-export const TodoListWidget = () => {
+export const TodoListSection = () => {
   const todoState = useStore(todoStore);
 
   const todos = useMemo(() => todoState.todos?.list ?? [], [todoState.todos]);
@@ -21,7 +21,7 @@ export const TodoListWidget = () => {
     >
       {todos.map((todo: TTodoDto.TTodoElementDto) => (
         <TodoIdContext key={todo.id} value={todo.id}>
-          <TodoListElement
+          <Task
             description={todo.description}
             status={todo.status}
             title={todo.title}

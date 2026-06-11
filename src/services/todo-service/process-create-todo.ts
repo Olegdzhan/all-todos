@@ -1,5 +1,5 @@
 import { TodoApi } from '@/api';
-import { CreateTodoAdapter } from '@/forms';
+import { CreateTodoAdapter } from '@/application/forms';
 import { ETodoStoreEvents, todoStore } from '@/store';
 
 export async function processCreateTodo(formTarget: HTMLFormElement | undefined): Promise<void> {

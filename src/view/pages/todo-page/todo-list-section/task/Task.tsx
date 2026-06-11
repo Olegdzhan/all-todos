@@ -2,11 +2,11 @@ import { memo, use } from 'react';
 import { ETaskStatus } from '@/domain/task-status';
 import { EDictionaryName } from '@/services/dictionary-service';
 import { Card, Text } from '@/view/ui-kit';
-import { DictionaryStatus } from '@/view/features/dictionaries';
-import { UpdateStatusButtonGroup } from '@/view/features/user-actions';
-import { TodoIdContext } from '../context';
-import { STATUS_TYPE_MAP } from '../values';
-import styles from './todo-list-element.module.css';
+import { DictionaryStatus } from '@/view/shared/dictionaries';
+import { UpdateStatusButtonGroup } from '../update-status-button-group';
+import { TodoIdContext } from '../contexts';
+import { STATUS_TYPE_MAP } from './task-values';
+import styles from './task.module.css';
 
 type TTodoListElementProps = {
   description: string;
@@ -14,7 +14,7 @@ type TTodoListElementProps = {
   title: string;
 };
 
-export const TodoListElement = memo<TTodoListElementProps>(({
+export const Task = memo<TTodoListElementProps>(({
   description,
   status,
   title,

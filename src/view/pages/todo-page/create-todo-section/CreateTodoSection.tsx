@@ -1,9 +1,9 @@
 import { memo } from 'react';
-import { CreateTodoForm } from '@/view/features/forms';
+import { CreateTodoForm } from '@/view/shared/forms';
 import { Card, ECardType, Text } from '@/view/ui-kit';
-import styles from './todo-form-widget.module.css';
+import styles from './create-todo-section.module.css';
 
-export const TodoFormWidget = memo(() => {
+export const CreateTodoSection = memo(() => {
   return (
     <Card
       as="aside"
