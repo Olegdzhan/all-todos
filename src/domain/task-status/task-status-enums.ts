@@ -1,10 +1,10 @@
-export enum ETodoStatus {
+export enum ETaskStatus {
   Complete = 'complete',
   InProgress = 'in_progress',
   Open = 'open',
 }
 
-export enum ETodoTaskStatusMove {
+export enum ETaskStatusMove {
   Next = 'next',
   Prev = 'prev',
 }

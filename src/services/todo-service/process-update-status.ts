@@ -1,10 +1,11 @@
 import { TodoApi } from '@/api';
-import { ETodoTaskStatusMove, type TTodoDto } from '@/dto';
+import { ETaskStatusMove } from '@/domain/task-status';
+import type { TTodoDto } from '@/dto';
 import { ETodoStoreEvents, todoStore } from '@/store';
 
 export const processUpdateTaskStatus = async (
   taskId: string,
-  direction: ETodoTaskStatusMove,
+  direction: ETaskStatusMove,
 ): Promise<void> => {
   todoStore.act(ETodoStoreEvents.SetError, null);
   todoStore.act(ETodoStoreEvents.SetLoading, true);

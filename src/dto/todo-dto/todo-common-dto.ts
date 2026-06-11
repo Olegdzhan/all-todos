@@ -1,8 +1,8 @@
-import { ETodoStatus } from './todo-enums';
+import { ETaskStatus } from '@/domain/task-status';
 
 export type TTodoElementDto = {
   description: string;
   id: string;
-  status: ETodoStatus;
+  status: ETaskStatus;
   title: string;
 };

@@ -1,10 +1,9 @@
-import { memo } from 'react';
 import { TodoStoreProvider } from '@/view/ui-controllers';
 import { TodoFormWidget } from '@/view/widgets/todo-form-widget';
 import { TodoListWidget } from '@/view/widgets/todo-list-widget';
 import styles from './todo-page.module.css';
 
-export const TodoPage = memo(() => {
+export const TodoPage = () => {
   return (
     <TodoStoreProvider>
       <section className={styles.formRow}>
@@ -16,4 +15,4 @@ export const TodoPage = memo(() => {
       <TodoListWidget />
     </TodoStoreProvider>
   );
-});
+};

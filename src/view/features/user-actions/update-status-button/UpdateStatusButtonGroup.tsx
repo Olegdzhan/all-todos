@@ -1,11 +1,11 @@
 import { memo } from 'react';
-import { ETodoTaskStatusMove, ETodoStatus } from '@/dto';
+import { ETaskStatus, ETaskStatusMove } from '@/domain/task-status';
 import { UpdateStatusButton } from './UpdateStatusButton';
 import styles from './update-status-button-group.module.css';
 
 type TUpdateStatusButtonGroupProps = {
   id: string;
-  status: ETodoStatus,
+  status: ETaskStatus,
 };
 
 export const UpdateStatusButtonGroup = memo(({
@@ -15,12 +15,12 @@ export const UpdateStatusButtonGroup = memo(({
   return (
     <div className={styles.btnGroup}>
       <UpdateStatusButton
-        direction={ETodoTaskStatusMove.Prev}
+        direction={ETaskStatusMove.Prev}
         id={id}
         status={status}
       />
       <UpdateStatusButton
-        direction={ETodoTaskStatusMove.Next}
+        direction={ETaskStatusMove.Next}
         id={id}
         status={status}
       />

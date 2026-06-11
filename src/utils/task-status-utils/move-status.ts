@@ -1,25 +1,25 @@
-import { ETodoStatus, ETodoTaskStatusMove } from '@/dto';
+import { ETaskStatus, ETaskStatusMove } from '@/domain/task-status';
 import {
   MAX_STATUS_ORDER,
   MIN_STATUS_ORDER,
   TODO_STATUS_LINE,
   TODO_STATUS_ORDER_MAP,
-} from '@/domain/bpm';
+} from '../../domain/task-status';
 
 export const moveStatus = (
-  status: ETodoStatus,
-  direction: ETodoTaskStatusMove
-): ETodoStatus | null => {
+  status: ETaskStatus,
+  direction: ETaskStatusMove
+): ETaskStatus | null => {
   const currentPosition = TODO_STATUS_ORDER_MAP.get(status);
   if (currentPosition == null) {
     return null;
   }
   let nextPosition: number;
   switch (direction) {
-    case ETodoTaskStatusMove.Next:
+    case ETaskStatusMove.Next:
       nextPosition = currentPosition + 1;
       break;
-    case ETodoTaskStatusMove.Prev:
+    case ETaskStatusMove.Prev:
       nextPosition = currentPosition - 1;
       break;
     default:

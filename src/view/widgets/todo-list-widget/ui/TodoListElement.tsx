@@ -1,5 +1,5 @@
 import { memo, use } from 'react';
-import { ETodoStatus } from '@/dto';
+import { ETaskStatus } from '@/domain/task-status';
 import { EDictionaryName } from '@/services/dictionary-service';
 import { Card, Text } from '@/view/ui-kit';
 import { DictionaryStatus } from '@/view/features/dictionaries';
@@ -10,7 +10,7 @@ import styles from './todo-list-element.module.css';
 
 type TTodoListElementProps = {
   description: string;
-  status: ETodoStatus;
+  status: ETaskStatus;
   title: string;
 };
 

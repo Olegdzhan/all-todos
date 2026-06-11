@@ -1,4 +1,5 @@
-import { ETodoStatus, type TTodoDto } from '@/dto';
+import { ETaskStatus } from '@/domain/task-status';
+import type { TTodoDto } from '@/dto';
 import { moveStatus } from '@/utils/task-status-utils';
 
 export class TodoMockService {
@@ -14,7 +15,7 @@ export class TodoMockService {
     const todoElement = {
       ...payload,
       id: String(Date.now()),
-      status: ETodoStatus.Open,
+      status: ETaskStatus.Open,
     };
     this._todos.push(todoElement);
     return todoElement;

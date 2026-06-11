@@ -1,14 +1,14 @@
 import { memo, useCallback, type MouseEvent } from 'react';
-import { ETodoStatus, ETodoTaskStatusMove } from '@/dto';
+import { ETaskStatus, ETaskStatusMove } from '@/domain/task-status';
 import { dictionaries } from '@/services/dictionary-service';
 import { processUpdateTaskStatus } from '@/services/todo-service';
 import { moveStatus } from '@/utils/task-status-utils';
 import { EFlatButtonType, FlatButton } from '@/view/ui-kit';
 
 type TUpdateStatusButtonProps = {
-  direction: ETodoTaskStatusMove;
+  direction: ETaskStatusMove;
   id: string;
-  status: ETodoStatus;
+  status: ETaskStatus;
 };
 
 export const UpdateStatusButton = memo(({
@@ -33,7 +33,7 @@ export const UpdateStatusButton = memo(({
     <FlatButton
       htmlType="button"
       onClick={onClick}
-      type={direction === ETodoTaskStatusMove.Next ? EFlatButtonType.Primary : EFlatButtonType.Secondary}
+      type={direction === ETaskStatusMove.Next ? EFlatButtonType.Primary : EFlatButtonType.Secondary}
     >
       {label}
     </FlatButton>
