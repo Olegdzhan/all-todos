@@ -1,26 +1,18 @@
-import { useCallback, useMemo, useSyncExternalStore } from 'react';
+import { useMemo, useSyncExternalStore } from 'react';
 import {
   ViewModel,
   type IStore,
   type TViewModelSelectors,
 } from '@/store/lib';
 import type { IUseStore } from './interfaces';
+import { createSubscribeFn, createSnapshotFn } from './react-controller-utils';
 
 export const useStore: IUseStore = <S, V>(
-  store: IStore<S>,
+  store: IStore<S> ,
   selectors?: TViewModelSelectors<S, V>,
 ): S | V => {
-  const createSubscribe = useCallback((onStoreChange: () => void) => {
-    const id = store.subscribe(onStoreChange);
-    return () => {
-      store.unsubscribe(id);
-    };
-  }, []);
-
-  const getSnapshot = useCallback(
-    (): S => store.state,
-    [],
-  );
+  const createSubscribe = useMemo(() => createSubscribeFn(store), []);
+  const getSnapshot = useMemo(() => createSnapshotFn(store), []);
 
   const state = useSyncExternalStore(createSubscribe, getSnapshot);
   if (selectors) {

@@ -5,7 +5,6 @@ import { browserslistToTargets } from 'lightningcss';
 import { patchCssModules } from 'vite-css-modules';
 import path from 'node:path';
 
-// https://vite.dev/config/
 export default defineConfig({
   build: {
     chunkSizeWarningLimit: 500,

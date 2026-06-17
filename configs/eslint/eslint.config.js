@@ -1,3 +1,4 @@
+import path from 'node:path';
 import js from '@eslint/js';
 import tsParser from '@typescript-eslint/parser'
 import globals from 'globals';
@@ -6,6 +7,8 @@ import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
 import tseslint from 'typescript-eslint';
 import { defineConfig, globalIgnores } from 'eslint/config';
+
+const tsConfigPath = path.join(__diranme, '../../', 'tsconfig.app.json');
 
 export default defineConfig([
   globalIgnores([
@@ -27,6 +30,9 @@ export default defineConfig([
       ecmaVersion: 'latest',
       globals: globals.browser,
       parser: tsParser,
+      parserOptions: {
+        project: tsConfigPath,
+      },
       sourceType: 'module',
     },
     rules: {
@@ -145,7 +151,6 @@ export default defineConfig([
       'object-curly-spacing': ['error', 'always'],
       'react-hooks/rules-of-hooks': 'error',
       'react-hooks/exhaustive-deps': 'warn',
-      'react/jsx-no-useless-fragment': 'error',
       'react/prop-types': 'off',
     },
   },
