@@ -1,30 +1,38 @@
 import { AStore } from './abstract-store';
-import type { IStore } from './store-interfaces.ts';
+import type { IParentMergedStore, IStore, IMergeableStore } from './store-interfaces.ts';
+import type { TFrameworkUpdaterFn } from './store-types';
 
 export type TMergedStoreObject = {
-  [k: string]: IStore<any>;
+  [k: string]: IStore<any> & IMergeableStore;
 };
 
 type TStoreState<T> = T extends IStore<infer S> ? S : never;
 
 type TMergedState = TUnionToIntersection<TStoreState<TMergedStoreObject[keyof TMergedStoreObject]>>
 
-// TODO: Проработать типизацию для ViewModel
-export class MergedStore extends AStore<TMergedState> {
-  private _stores: Array<[string, IStore<any>]>;
+export class MergedStore extends AStore<TMergedState> implements IParentMergedStore{
+  private _state: TMergedState;
 
-  constructor(stores: TMergedStoreObject) {
+  constructor(private _stores: TMergedStoreObject) {
     super();
-    this._stores = Object.entries(stores);
+    this._state = {};
+    Object.entries(this._stores).forEach(([key, store]: [string, IStore<any> & IMergeableStore]) => {
+      this._state[key as keyof TMergedStoreObject] = store.state;
+      store.setParentMergedStore(this, key);
+    });
   }
 
   get state(): TMergedState {
-    return this._stores.reduce(
-      (acc: TMergedState, [key, store]): TMergedState => {
-        acc[key as keyof TMergedStoreObject] = store.state;
-        return acc;
-      },
-      {} as TMergedState,
-    );
+    return this._state;
+  }
+
+  onChildEmit(childKey: string) {
+    this._state = {
+      ...this._state,
+      [childKey]: this._stores[childKey].state,
+    };
+    this._subscriptions.forEach((frameworkUpdater: TFrameworkUpdaterFn): void => {
+      frameworkUpdater();
+    });
   }
 }

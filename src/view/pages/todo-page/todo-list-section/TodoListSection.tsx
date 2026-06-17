@@ -1,33 +1,23 @@
-import { useMemo } from 'react';
-import { LOADERS_IDS } from '@/application/loaders';
-import type { TTodoDto } from '@/dto';
-import { loadingStore, todoStore } from '@/store';
+import { mergedLoadingAndTodoStore } from '@/store';
 import { useStore } from '@/view/ui-controllers';
 import { Loadable } from '@/view/ui-kit';
+import { todoListSectionVM } from '@/view/view-models/for-pages/todo-page';
 import { TodoIdContext } from './contexts';
 import { Task } from './task';
 import styles from './todo-list-section.module.css';
 
 export const TodoListSection = () => {
-  const todoState = useStore(todoStore);
-  const loadingState = useStore(loadingStore);
-
-  const todos = useMemo(() => todoState.todos?.list ?? [], [todoState.todos]);
-  const loadingMessage = loadingState[LOADERS_IDS.GET_TODO_LIST];
+  const viewModel = useStore(mergedLoadingAndTodoStore, todoListSectionVM);
 
   return (
     <Loadable
       as="ul"
       className={styles.list}
-      loading={loadingMessage}
+      loading={viewModel.listIsLoading}
     >
-      {todos.map((todo: TTodoDto.TTodoElementDto) => (
-        <TodoIdContext key={todo.id} value={todo.id}>
-          <Task
-            description={todo.description}
-            status={todo.status}
-            title={todo.title}
-          />
+      {viewModel.todoIds.map((todoId: string) => (
+        <TodoIdContext key={todoId} value={todoId}>
+          <Task />
         </TodoIdContext>
       ))}
     </Loadable>
