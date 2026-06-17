@@ -1,6 +1,7 @@
-import type { ReactNode } from 'react';
 import cn from 'classnames';
 import styles from './loadable.module.css';
+
+import type { ReactNode } from 'react';
 
 type TLoadableProps = {
   as?: 'section' | 'aside' | 'div' | 'ul';

@@ -1,5 +1,5 @@
-import { memo, type ReactNode } from 'react';
 import cn from 'classnames';
+import { memo, type ReactNode } from 'react';
 import { Loadable } from '../loadable';
 import { ECardType } from './card-enums';
 import styles from './card.module.css';

@@ -1,6 +1,6 @@
 import { ETaskStatus } from '@/domain/task-status';
-import type { TTodoDto } from '@/dto';
 import { moveStatus } from '@/utils/task-status-utils';
+import type { TTodoDto } from '@/dto';
 
 export class TodoMockService {
   private _todos: TTodoDto.TTodoElementDto[] = [];

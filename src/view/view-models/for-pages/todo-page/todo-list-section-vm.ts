@@ -1,5 +1,5 @@
-import type { TTodoDto } from '@/dto';
 import { LOADERS_IDS } from '@/application/loaders';
+import type { TTodoDto } from '@/dto';
 import type { TLoadingAndTodoState } from '@/store';
 import type { TViewModelSelectors } from '@/store/lib';
 

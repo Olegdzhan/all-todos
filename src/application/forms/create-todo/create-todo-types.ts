@@ -1,4 +1,4 @@
-import { ECreateTodoFormField } from './create-todo-enums';
+import type { ECreateTodoFormField } from './create-todo-enums';
 
 export type TCreateTodoForm = {
   [ECreateTodoFormField.Description]: string;

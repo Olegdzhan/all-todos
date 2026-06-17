@@ -1,5 +1,5 @@
-import { ETaskStatusMove } from '@/domain/task-status';
 import type { TTodoElementDto } from './todo-common-dto';
+import type { ETaskStatusMove } from '@/domain/task-status';
 
 export type TCreateTodoInDto = {
   description: string;

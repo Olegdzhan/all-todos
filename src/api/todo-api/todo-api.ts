@@ -1,6 +1,7 @@
-import type { TTodoDto } from '@/dto';
 import { delayedPromise } from '@/utils/promises';
 import { todoMockService } from './mock-service';
+
+import type { TTodoDto } from '@/dto';
 
 export class TodoApi {
   static async createTodo(payload: TTodoDto.TCreateTodoInDto): Promise<TTodoDto.TTodoElementDto> {

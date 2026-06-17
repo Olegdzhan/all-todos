@@ -1,12 +1,12 @@
 import { memo, use } from 'react';
 import { EDictionaryName } from '@/services/dictionary-service';
 import { mergedLoadingAndTodoStore } from '@/store';
+import { DictionaryStatus } from '@/view/shared/dictionaries';
 import { useStore } from '@/view/ui-controllers';
 import { Card, Text } from '@/view/ui-kit';
-import { DictionaryStatus } from '@/view/shared/dictionaries';
 import { taskVM } from '@/view/view-models/for-pages/todo-page';
-import { UpdateStatusButtonGroup } from '../update-status-button-group';
 import { TodoIdContext } from '../contexts';
+import { UpdateStatusButtonGroup } from '../update-status-button-group';
 import { STATUS_TYPE_MAP } from './task-values';
 import styles from './task.module.css';
 

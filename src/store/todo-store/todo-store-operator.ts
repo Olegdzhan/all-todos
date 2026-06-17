@@ -1,5 +1,5 @@
-import type { TTodoDto } from '@/dto';
 import type { TTodoState } from './todo-store-types';
+import type { TTodoDto } from '@/dto';
 
 export class TodoStoreOperator {
   static setError(state: TTodoState, error: string | string[] | null): TTodoState {

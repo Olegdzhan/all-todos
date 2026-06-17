@@ -6,7 +6,6 @@ export const TODO_STATUS_ORDER_MAP = new Map<ETaskStatus, number>([
   [ETaskStatus.Complete, 2],
 ]);
 
-
 export const TODO_STATUS_LINE: ETaskStatus[] = [];
 TODO_STATUS_ORDER_MAP.forEach((value: number, key: ETaskStatus) => {
   TODO_STATUS_LINE[value] = key;

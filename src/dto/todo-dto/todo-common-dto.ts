@@ -1,4 +1,4 @@
-import { ETaskStatus } from '@/domain/task-status';
+import type { ETaskStatus } from '@/domain/task-status';
 
 export type TTodoElementDto = {
   description: string;

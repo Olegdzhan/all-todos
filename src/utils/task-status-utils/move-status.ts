@@ -1,4 +1,4 @@
-import { ETaskStatus, ETaskStatusMove } from '@/domain/task-status';
+import { ETaskStatusMove, type ETaskStatus } from '@/domain/task-status';
 import {
   MAX_STATUS_ORDER,
   MIN_STATUS_ORDER,

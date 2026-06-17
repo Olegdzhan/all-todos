@@ -1,9 +1,9 @@
+import cn from 'classnames';
 import {
   memo,
   type ReactNode,
   type MouseEvent,
 } from 'react';
-import cn from 'classnames';
 import { EFlatButtonType } from './flat-button-enums';
 import styles from './flat-button.module.css';
 

@@ -3,7 +3,12 @@ import { CREATE_TDO_FORM_IDS, ECreateTodoFormField, EFormName } from '@/applicat
 import { processCreateTodo } from '@/services/todo-service';
 import { loadingStore } from '@/store';
 import { useStore } from '@/view/ui-controllers';
-import { EFlatButtonType, FlatButton, TextArea, TextInput } from '@/view/ui-kit';
+import {
+  EFlatButtonType,
+  FlatButton,
+  TextArea,
+  TextInput,
+} from '@/view/ui-kit';
 import { createTodoFormVM } from '@/view/view-models/for-shared';
 import styles from './create-todo-form.module.css';
 

@@ -1,5 +1,5 @@
-import { memo, type ReactNode } from 'react';
 import cn from 'classnames';
+import { memo, type ReactNode } from 'react';
 import { EStatusType } from './status-enums';
 import styles from './status.module.css';
 

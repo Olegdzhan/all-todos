@@ -1,14 +1,14 @@
-import path from 'node:path';
+import path from 'path';
 import js from '@eslint/js';
 import tsParser from '@typescript-eslint/parser'
 import globals from 'globals';
-import { importX } from 'eslint-plugin-import-x';
+import perfectionist from 'eslint-plugin-perfectionist';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
 import tseslint from 'typescript-eslint';
 import { defineConfig, globalIgnores } from 'eslint/config';
 
-const tsConfigPath = path.join(__diranme, '../../', 'tsconfig.app.json');
+const tsConfigPath = path.join('../../', 'tsconfig.app.json');
 
 export default defineConfig([
   globalIgnores([
@@ -18,10 +18,11 @@ export default defineConfig([
   ]),
   {
     files: ['**/*.{ts,tsx}'],
+    plugins: {
+      perfectionist,
+    },
     extends: [
       js.configs.recommended,
-      importX.flatConfigs.recommended,
-      importX.flatConfigs.typescript,
       tseslint.configs.recommended,
       reactHooks.configs.flat.recommended,
       reactRefresh.configs.vite,
@@ -69,37 +70,24 @@ export default defineConfig([
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-unsafe-assignment': 'off',
       '@typescript-eslint/no-unsafe-return': 'off',
-      'import-x/no-dynamic-require': 'warn',
-      'import-x/no-nodejs-modules': 'warn',
-      'import-x/order': [
+      'perfectionist/sort-imports': [
         'error',
         {
-          alphabetize: {
-            caseInsensitive: true,
-            order: 'asc',
-          },
           groups: [
             'builtin',
             'external',
             'internal',
-            ['parent', 'sibling', 'index'],
-            'object',
+            'parent',
+            'sibling',
+            'index',
+            'style',
             'type',
           ],
-          'newlines-between': 'never',
-          pathGroups: [
-            {
-              group: 'external',
-              pattern: 'react',
-              position: 'before',
-            },
-            {
-              group: 'internal',
-              pattern: '@/**',
-              position: 'before',
-            },
-          ],
-          pathGroupsExcludedImportTypes: ['react'],
+          type: 'natural',
+          sortSideEffects: false,
+          partitionByComment: false,
+          partitionByNewLine: false,
+          newlinesBetween: 'ignore',
         },
       ],
       'max-len': [

@@ -1,6 +1,6 @@
 import { LOADERS_IDS } from '@/application/loaders';
+import type { ETaskStatus } from '@/domain/task-status';
 import type { TTodoDto } from '@/dto';
-import { ETaskStatus } from '@/domain/task-status';
 import type { TLoadingAndTodoState } from '@/store';
 import type { TViewModelParametricSelectors } from '@/store/lib';
 

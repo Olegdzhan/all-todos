@@ -1,6 +1,6 @@
 import { memo } from 'react';
-import { dictionaries, EDictionaryName } from '@/services/dictionary-service';
-import { EStatusType, Status } from '@/view/ui-kit';
+import { dictionaries, type EDictionaryName } from '@/services/dictionary-service';
+import { Status, type EStatusType } from '@/view/ui-kit';
 
 type TDictionaryStatusProps = {
   className?: string;

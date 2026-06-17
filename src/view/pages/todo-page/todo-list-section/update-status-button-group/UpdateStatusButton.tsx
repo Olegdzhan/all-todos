@@ -1,5 +1,5 @@
 import { memo, useCallback, type MouseEvent } from 'react';
-import { ETaskStatus, ETaskStatusMove } from '@/domain/task-status';
+import { ETaskStatusMove, type ETaskStatus } from '@/domain/task-status';
 import { dictionaries } from '@/services/dictionary-service';
 import { processUpdateTaskStatus } from '@/services/todo-service';
 import { moveStatus } from '@/utils/task-status-utils';
@@ -18,14 +18,14 @@ export const UpdateStatusButton = memo(({
 }: TUpdateStatusButtonProps) => {
   const nextStatus = moveStatus(status, direction);
 
-  if (nextStatus === null) {
-    return null;
-  }
-
   const onClick = useCallback((event: MouseEvent<HTMLButtonElement>): void => {
     event.preventDefault();
     processUpdateTaskStatus(id, direction);
   }, [id, direction]);
+
+  if (nextStatus === null) {
+    return null;
+  }
 
   const label = dictionaries.todoStatusMap.get(nextStatus);
 

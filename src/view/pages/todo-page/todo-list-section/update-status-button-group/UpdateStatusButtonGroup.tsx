@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { ETaskStatus, ETaskStatusMove } from '@/domain/task-status';
+import { ETaskStatusMove, type ETaskStatus } from '@/domain/task-status';
 import { UpdateStatusButton } from './UpdateStatusButton';
 import styles from './update-status-button-group.module.css';
 

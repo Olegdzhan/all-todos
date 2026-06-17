@@ -1,8 +1,9 @@
-import type { TLoadingState } from './loading-store-types';
 import {
   DEFAULT_LOADING_LABEL,
   MAX_LOADING_ELEMENTS_IN_STORE,
 } from './loading-store-values';
+
+import type { TLoadingState } from './loading-store-types';
 
 export class LoadingStoreOperator {
   private static _removeOne(state: TLoadingState, id: string): TLoadingState {
@@ -13,7 +14,7 @@ export class LoadingStoreOperator {
     return state;
   }
 
-  static clearAll(_: TLoadingState): TLoadingState {
+  static clearAll(): TLoadingState {
     return {} as TLoadingState;
   }
 

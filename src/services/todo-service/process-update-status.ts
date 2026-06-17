@@ -1,13 +1,14 @@
 import { TodoApi } from '@/api';
 import { LOADERS_IDS } from '@/application/loaders';
-import { ETaskStatusMove } from '@/domain/task-status';
-import type { TTodoDto } from '@/dto';
 import {
   ELoadingStoreEvent,
   ETodoStoreEvents,
   loadingStore,
   todoStore,
 } from '@/store';
+
+import type { ETaskStatusMove } from '@/domain/task-status';
+import type { TTodoDto } from '@/dto';
 
 export const processUpdateTaskStatus = async (
   taskId: string,
