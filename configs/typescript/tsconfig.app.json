@@ -24,7 +24,8 @@
     /* aliases */
     "baseUrl": "../../",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@iteasy/*": ["./src/@iteasy/*"]
     }
   },
   "include": [

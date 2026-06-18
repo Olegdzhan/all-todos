@@ -1,3 +1,4 @@
+import { useStore } from '@iteasy/store-adapter-react';
 import {
   memo,
   use,
@@ -6,8 +7,6 @@ import {
 } from 'react';
 import { ETaskStatusMove } from '@/domain/task-status';
 import { processUpdateTaskStatus } from '@/services/todo-service';
-import { todoStore } from '@/store';
-import { useStore } from '@/view/ui-controllers';
 import { EFlatButtonType, FlatButton } from '@/view/ui-kit';
 import { updateStatusButtonVM } from '@/view/view-models/for-pages/todo-page';
 import { TodoIdContext } from '../contexts';
@@ -26,9 +25,10 @@ export const UpdateStatusButton = memo(({
     processUpdateTaskStatus(todoId, direction);
   }, [todoId, direction]);
 
-  const { statuses } = useStore(todoStore, updateStatusButtonVM, { direction, todoId });
+  const addons = { direction, todoId };
+  const viewModel = useStore(updateStatusButtonVM, { addons });
 
-  if (statuses.afterUpdateStatus === null) {
+  if (viewModel.afterUpdateStatus === null) {
     return null;
   }
 
@@ -38,7 +38,7 @@ export const UpdateStatusButton = memo(({
       onClick={onClick}
       type={direction === ETaskStatusMove.Next ? EFlatButtonType.Primary : EFlatButtonType.Secondary}
     >
-      {statuses.actionLabel}
+      {viewModel.actionLabel}
     </FlatButton>
   );
 });

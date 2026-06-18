@@ -47,6 +47,7 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
+      '@iteasy': path.join(__dirname, '../../', './src/@iteasy'),
       '@': path.join(__dirname, '../../', './src'),
     },
   },

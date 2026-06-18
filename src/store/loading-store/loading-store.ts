@@ -1,4 +1,4 @@
-import { Store } from '../lib';
+import { Store } from '@iteasy/store';
 import { ELoadingStoreEvent } from './loading-store-enums';
 import { LoadingStoreOperator } from './loading-store-operator';
 import type { TLoadingState } from './loading-store-types';

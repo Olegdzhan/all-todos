@@ -40,6 +40,7 @@ export default defineConfig([
       sourceType: 'module',
     },
     rules: {
+      '@typescript-eslint/ban-ts-comment': 'off',
       '@typescript-eslint/consistent-type-imports': 'error',
       '@typescript-eslint/naming-convention': [
         'error',

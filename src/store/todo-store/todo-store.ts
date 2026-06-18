@@ -1,4 +1,4 @@
-import { Store } from '../lib/store';
+import { Store } from '@iteasy/store';
 import { ETodoStoreEvents } from './todo-store-enums';
 import { TodoStoreOperator } from './todo-store-operator';
 import type { TTodoState } from './todo-store-types';

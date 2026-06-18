@@ -1,7 +1,9 @@
+import { ViewModel } from '@iteasy/store';
 import { LOADERS_IDS } from '@/application/loaders';
+import { mergedLoadingAndTodoStore } from '@/store';
+
 import type { TTodoDto } from '@/dto';
 import type { TLoadingAndTodoState } from '@/store';
-import type { TViewModelSelectors } from '@/store/lib';
 
 type TTodoListSectionVM = {
   listIsLoading: string | boolean;
@@ -10,9 +12,11 @@ type TTodoListSectionVM = {
 
 const DEFAULT_EMPTY_ID_LIST: string[] = [];
 
-export const todoListSectionVM: TViewModelSelectors<TLoadingAndTodoState, TTodoListSectionVM> = {
-  listIsLoading: ({ loaders }: TLoadingAndTodoState): string | boolean => loaders[LOADERS_IDS.GET_TODO_LIST] || false,
-  todoIds: ({ todo }: TLoadingAndTodoState): string[] => (
-    todo.todos?.list.map((el: TTodoDto.TTodoElementDto): string => el.id) ?? DEFAULT_EMPTY_ID_LIST
-  ),
-};
+export const todoListSectionVM = new ViewModel<TLoadingAndTodoState, TTodoListSectionVM>(
+  mergedLoadingAndTodoStore,
+  ({ loaders, todo }: TLoadingAndTodoState): TTodoListSectionVM => {
+    const listIsLoading = loaders[LOADERS_IDS.GET_TODO_LIST] || false;
+    const todoIds = todo.todos?.list.map((el: TTodoDto.TTodoElementDto): string => el.id) ?? DEFAULT_EMPTY_ID_LIST;
+    return { listIsLoading, todoIds };
+  },
+);

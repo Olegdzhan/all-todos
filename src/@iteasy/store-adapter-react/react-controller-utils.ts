@@ -1,4 +1,4 @@
-import type { IStore, TFrameworkUpdaterFn } from '@/store/lib';
+import type { IStore, TFrameworkUpdaterFn } from '@iteasy/store';
 
 export const createSubscribeFn = <S>(store: IStore<S>) => (
   (onStoreChange: TFrameworkUpdaterFn): () => void => {

@@ -1,6 +1,10 @@
 import { AStore } from './abstract-store';
-import type { IParentMergedStore, IStore, IMergeableStore } from './store-interfaces.ts';
-import type { TFrameworkUpdaterFn } from './store-types';
+import type {
+  IMergeableStore,
+  IParentMergedStore,
+  IStore,
+  TFrameworkUpdaterFn,
+} from './types';
 
 export type TMergedStoreObject = {
   [k: string]: IStore<any> & IMergeableStore;

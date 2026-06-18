@@ -1,18 +1,15 @@
+import { ViewModel } from '@iteasy/store';
 import { dictionaries } from '@/services/dictionary-service';
+import { todoStore } from '@/store';
 import { moveStatus } from '@/utils/task-status-utils';
 
 import type { ETaskStatus, ETaskStatusMove } from '@/domain/task-status';
 import type { TTodoDto } from '@/dto';
 import type { TTodoState } from '@/store';
-import type { TViewModelParametricSelectors } from '@/store/lib';
-
-type TUpdateStatusButtonStatusesVM = {
-  actionLabel?: string;
-  afterUpdateStatus: ETaskStatus | null;
-};
 
 type TUpdateStatusButtonVM = {
-  statuses: TUpdateStatusButtonStatusesVM;
+  actionLabel?: string;
+  afterUpdateStatus: ETaskStatus | null;
 };
 
 type TUpdateStatusButtonVMAddon = {
@@ -20,15 +17,12 @@ type TUpdateStatusButtonVMAddon = {
   todoId: string;
 };
 
-export const updateStatusButtonVM: TViewModelParametricSelectors<
-  TTodoState,
-  TUpdateStatusButtonVM,
-  TUpdateStatusButtonVMAddon
-> = {
-  statuses: (
+export const updateStatusButtonVM = new ViewModel<TTodoState, TUpdateStatusButtonVM, TUpdateStatusButtonVMAddon>(
+  todoStore,
+  (
     { todos }: TTodoState,
     { direction, todoId }: TUpdateStatusButtonVMAddon,
-  ): TUpdateStatusButtonStatusesVM => {
+  ): TUpdateStatusButtonVM => {
     const { status } = todos!.list.find((el: TTodoDto.TTodoElementDto): boolean => el.id === todoId)!;
     const afterUpdateStatus = moveStatus(status, direction);
     const actionLabel = afterUpdateStatus ? dictionaries.todoStatusMap.get(afterUpdateStatus) : undefined;
@@ -37,4 +31,4 @@ export const updateStatusButtonVM: TViewModelParametricSelectors<
       afterUpdateStatus,
     };
   },
-};
+);

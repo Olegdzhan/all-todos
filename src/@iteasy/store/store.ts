@@ -1,9 +1,10 @@
 import { AStore } from './abstract-store';
-import type { IMergeableStore, IParentMergedStore } from './store-interfaces';
 import type {
+  IMergeableStore,
+  IParentMergedStore,
   TFrameworkUpdaterFn,
   TPredicate,
-} from './store-types';
+} from './types';
 
 export class Store<S> extends AStore<S> implements IMergeableStore{
   private readonly _events: Map<string | number | symbol, TPredicate<S>> = new Map();

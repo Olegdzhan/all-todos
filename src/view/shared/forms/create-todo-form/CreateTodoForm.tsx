@@ -1,8 +1,7 @@
+import { useStore } from '@iteasy/store-adapter-react';
 import { memo, type SubmitEvent } from 'react';
 import { CREATE_TDO_FORM_IDS, ECreateTodoFormField, EFormName } from '@/application/forms';
 import { processCreateTodo } from '@/services/todo-service';
-import { loadingStore } from '@/store';
-import { useStore } from '@/view/ui-controllers';
 import {
   EFlatButtonType,
   FlatButton,
@@ -18,7 +17,7 @@ export const CreateTodoForm = memo(() => {
     processCreateTodo(event.target);
   };
 
-  const viewModel = useStore(loadingStore, createTodoFormVM);
+  const viewModel = useStore(createTodoFormVM);
 
   return (
     <form
