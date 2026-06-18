@@ -1,9 +1,9 @@
-import { defineConfig } from 'vite';
+import path from 'node:path';
 import react from '@vitejs/plugin-react';
 import browserslist from 'browserslist';
 import { browserslistToTargets } from 'lightningcss';
+import { defineConfig } from 'vite';
 import { patchCssModules } from 'vite-css-modules';
-import path from 'node:path';
 
 export default defineConfig({
   build: {
@@ -47,7 +47,7 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'),
+      '@': path.join(__dirname, '../../', './src'),
     },
   },
 });

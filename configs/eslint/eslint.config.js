@@ -8,8 +8,6 @@ import reactRefresh from 'eslint-plugin-react-refresh';
 import tseslint from 'typescript-eslint';
 import { defineConfig, globalIgnores } from 'eslint/config';
 
-const tsConfigPath = path.join('../../', 'tsconfig.app.json');
-
 export default defineConfig([
   globalIgnores([
     'configs',
@@ -32,7 +30,12 @@ export default defineConfig([
       globals: globals.browser,
       parser: tsParser,
       parserOptions: {
-        project: tsConfigPath,
+        project: [
+          './tsconfig.json',
+          './configs/typescript/tsconfig.app.json',
+          './configs/typescript/tsconfig.node.json',
+        ],
+        tsconfigRootDir: path.join(import.meta.dirname, '../../'),
       },
       sourceType: 'module',
     },
