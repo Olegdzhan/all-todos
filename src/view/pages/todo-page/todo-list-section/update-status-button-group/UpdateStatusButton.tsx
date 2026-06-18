@@ -1,33 +1,36 @@
-import { memo, useCallback, type MouseEvent } from 'react';
-import { ETaskStatusMove, type ETaskStatus } from '@/domain/task-status';
-import { dictionaries } from '@/services/dictionary-service';
+import {
+  memo,
+  use,
+  useCallback,
+  type MouseEvent,
+} from 'react';
+import { ETaskStatusMove } from '@/domain/task-status';
 import { processUpdateTaskStatus } from '@/services/todo-service';
-import { moveStatus } from '@/utils/task-status-utils';
+import { todoStore } from '@/store';
+import { useStore } from '@/view/ui-controllers';
 import { EFlatButtonType, FlatButton } from '@/view/ui-kit';
+import { updateStatusButtonVM } from '@/view/view-models/for-pages/todo-page';
+import { TodoIdContext } from '../contexts';
 
 type TUpdateStatusButtonProps = {
   direction: ETaskStatusMove;
-  id: string;
-  status: ETaskStatus;
 };
 
 export const UpdateStatusButton = memo(({
   direction,
-  id,
-  status,
 }: TUpdateStatusButtonProps) => {
-  const nextStatus = moveStatus(status, direction);
+  const todoId = use(TodoIdContext);
 
   const onClick = useCallback((event: MouseEvent<HTMLButtonElement>): void => {
     event.preventDefault();
-    processUpdateTaskStatus(id, direction);
-  }, [id, direction]);
+    processUpdateTaskStatus(todoId, direction);
+  }, [todoId, direction]);
 
-  if (nextStatus === null) {
+  const { statuses } = useStore(todoStore, updateStatusButtonVM, { direction, todoId });
+
+  if (statuses.afterUpdateStatus === null) {
     return null;
   }
-
-  const label = dictionaries.todoStatusMap.get(nextStatus);
 
   return (
     <FlatButton
@@ -35,7 +38,7 @@ export const UpdateStatusButton = memo(({
       onClick={onClick}
       type={direction === ETaskStatusMove.Next ? EFlatButtonType.Primary : EFlatButtonType.Secondary}
     >
-      {label}
+      {statuses.actionLabel}
     </FlatButton>
   );
 });
