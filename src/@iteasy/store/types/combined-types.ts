@@ -6,19 +6,8 @@ export type TMergedStoreObject = {
 
 export type TStoreState<T> = T extends IStore<infer S> ? S : never;
 
-export type TStoreMemoized<T> = T extends IStore<TStoreState<T>>
-  ? ReturnType<T['getMemo']>
-  : never;
-
 export type TMergedState = TUnionToIntersection<TStoreState<TMergedStoreObject[keyof TMergedStoreObject]>>;
 
-export type TSelector<S, M, R> = (
-  state: S,
-  memoized?: M,
-) => R;
+export type TSelector<S, R> = TAnyFunction & ((state: S) => R);
 
-export type TParametricSelector<S, M, R, A> = (
-  state:S,
-  addons: A,
-  memoized?: M,
-) => R;
+export type TParametricSelector<S, R, A> = TAnyFunction & ((state:S, addons: A) => R);

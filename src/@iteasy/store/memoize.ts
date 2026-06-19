@@ -1,16 +1,12 @@
-export function memoize<
-  F extends (...args: any[]) => any,
-  A extends Parameters<F>,
-  R extends ReturnType<F>
->(fn: F extends (...args: A) => R ? F : never): F {
-  const cache = new Map<string, R>();
+export function memoize<F extends TAnyFunction>(fn: F): F {
+  const cache = new Map<string, ReturnType<F>>();
 
-  return function memoizedFn(...args: A): R {
+  return function memoizedFn(...args: Parameters<F>): ReturnType<F> {
     const key = JSON.stringify(args);
     if (cache.has(key)) {
       return cache.get(key)!;
     }
-    const result = fn(...args);
+    const result = fn(...args) as ReturnType<F>;
     cache.set(key, result);
     return result;
   } as F;

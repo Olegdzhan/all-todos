@@ -6,10 +6,6 @@ import type {
 export interface IStore<S> {
   get state(): S;
 
-  getMemo<M extends object>(): M;
-
-  memoize(key: string, fn: <R>(s: S) => R): IStore<S>
-
   subscribe(frameworkUpdater: TFrameworkUpdaterFn): TStoreSubscriptionId;
 
   unsubscribe(id: TStoreSubscriptionId): void;

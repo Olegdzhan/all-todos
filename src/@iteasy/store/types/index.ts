@@ -4,6 +4,8 @@ export type {
   TStoreSubscriptionId,
 } from './base-types';
 export type {
+  TMergedState,
+  TMergedStoreObject,
   TParametricSelector,
   TSelector,
   TStoreState,

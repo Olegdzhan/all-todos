@@ -4,15 +4,9 @@ import type {
   IParentMergedStore,
   IStore,
   TFrameworkUpdaterFn,
+  TMergedState,
+  TMergedStoreObject,
 } from './types';
-
-export type TMergedStoreObject = {
-  [k: string]: IStore<any> & IMergeableStore;
-};
-
-type TStoreState<T> = T extends IStore<infer S> ? S : never;
-
-type TMergedState = TUnionToIntersection<TStoreState<TMergedStoreObject[keyof TMergedStoreObject]>>
 
 export class MergedStore extends AStore<TMergedState> implements IParentMergedStore{
   private _state: TMergedState;

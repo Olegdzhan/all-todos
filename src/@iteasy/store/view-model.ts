@@ -11,21 +11,19 @@ export class ViewModel<
   S,
   V,
   A = any,
-  Sel = TSelector<S, ReturnType<IStore<S>['getMemo']>, V>,
-  PSel = TParametricSelector<S, ReturnType<IStore<S>['getMemo']>, V, A>,
 > implements IViewModel<S, V, A>{
   private _addons?: A;
 
-  private readonly _memoSelector: Sel | PSel;
+  private readonly _memoSelector: TSelector<S, V> | TParametricSelector<S, V, A>;
 
   constructor(
     private readonly _store: IStore<S>,
-    private readonly _selector: Sel | PSel,
+    private readonly _selector: TSelector<S, V> | TParametricSelector<S, V, A>,
   ) {
-    this._memoSelector = memoize(this._selector as any) as Sel | PSel;
+    this._memoSelector = memoize(this._selector);
   }
 
-  private _defineSelector(isMemoizedValue?: boolean): Sel | PSel {
+  private _defineSelector(isMemoizedValue?: boolean): TSelector<S, V> | TParametricSelector<S, V, A> {
     return isMemoizedValue ? this._memoSelector : this._selector;
   }
 
@@ -36,12 +34,9 @@ export class ViewModel<
   get(arg?: { memo: boolean; }): V {
     const selector = this._defineSelector(arg?.memo);
     if (!this._addons) {
-      // TODO: remove ts-ignore
-      // @ts-ignore
-      return selector(this._store.state, this._store.getMemo());
+      return (selector as TSelector<S, V>)(this._store.state);
     }
-    // @ts-ignore
-    return selector(this._store.state, this._addons, this._store.getMemo());
+    return (selector as TParametricSelector<S, V, A>)(this._store.state, this._addons);
   }
 
   getStore(): IStore<S> {

@@ -6,3 +6,5 @@ declare type TUnionToIntersection<U> =
     ) extends (arg: infer I) => void
     ? I
     : never;
+
+declare type TAnyFunction = (...args: any[]) => any;

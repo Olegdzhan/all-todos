@@ -1,3 +1,4 @@
+export { MemoizeMethods } from './decorators';
 export { merge } from './merge';
 export { Store } from './store';
 export type {
