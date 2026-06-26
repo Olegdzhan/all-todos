@@ -4,7 +4,7 @@ export class TodoEndpoints {
   private readonly basePath: string;
 
   constructor(apiPath: string) {
-    this.basePath = `${apiPath}/todos/`;
+    this.basePath = `${apiPath}/todos`;
   }
 
   deleteTodo(id: number): string {
