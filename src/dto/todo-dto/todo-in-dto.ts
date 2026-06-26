@@ -1,4 +1,3 @@
-import type { TTodoElementDto } from './todo-common-dto';
 import type { ETaskStatusMove } from '@/domain/task-status';
 
 export type TCreateTodoInDto = {
@@ -6,11 +5,19 @@ export type TCreateTodoInDto = {
   title: string;
 };
 
-export type TUpdateTodoInDto = Omit<Partial<TTodoElementDto>, 'id'> & {
-  id: string;
+export type TGetTodoByIdInDto = {
+  id: number;
+};
+
+export type TDeleteTodoInDto = TGetTodoByIdInDto;
+
+export type TUpdateTodoInDto = {
+  id: number;
+  description?: string;
+  title?: string;
 };
 
 export type TUpdateTaskStatusInDto = {
-  id: string;
+  id: number;
   statusMove: ETaskStatusMove;
 };

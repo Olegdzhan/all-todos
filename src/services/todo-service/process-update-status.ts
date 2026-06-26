@@ -1,4 +1,4 @@
-import { TodoApi } from '@/api';
+import { todoApi } from '@/api';
 import { LOADERS_IDS } from '@/application/loaders';
 import {
   ELoadingStoreEvent,
@@ -11,7 +11,7 @@ import type { ETaskStatusMove } from '@/domain/task-status';
 import type { TTodoDto } from '@/dto';
 
 export const processUpdateTaskStatus = async (
-  taskId: string,
+  taskId: number,
   direction: ETaskStatusMove,
 ): Promise<void> => {
   todoStore.act(ETodoStoreEvents.SetError, null);
@@ -21,10 +21,10 @@ export const processUpdateTaskStatus = async (
     statusMove: direction,
   };
   try {
-    await TodoApi.updateStatus(payload);
+    await todoApi.updateTaskStatus(payload);
     loadingStore.act(ELoadingStoreEvent.SetLoading, LOADERS_IDS.GET_TODO_LIST, 'Получение списка задач');
     loadingStore.act(ELoadingStoreEvent.ClearLoading, LOADERS_IDS.UPDATE_STATUS$(taskId));
-    const res = await TodoApi.getTodos();
+    const res = await todoApi.getAllTodos();
     todoStore.act(ETodoStoreEvents.SetTodos, res);
     loadingStore.act(ELoadingStoreEvent.ClearLoading, LOADERS_IDS.GET_TODO_LIST);
   } catch (err: any) {

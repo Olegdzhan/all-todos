@@ -1,1 +1,1 @@
-export { TodoApi } from './todo-api';
+export { todoApi } from './todo-api';

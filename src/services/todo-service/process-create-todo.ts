@@ -1,4 +1,4 @@
-import { TodoApi } from '@/api';
+import { todoApi } from '@/api';
 import { CreateTodoAdapter } from '@/application/forms';
 import { LOADERS_IDS } from '@/application/loaders';
 import {
@@ -15,10 +15,10 @@ export async function processCreateTodo(formTarget: HTMLFormElement | undefined)
   todoStore.act(ETodoStoreEvents.SetError, null);
   try {
     const payload = CreateTodoAdapter.formToPayload(formData);
-    await TodoApi.createTodo(payload);
+    await todoApi.createTodo(payload);
     loadingStore.act(ELoadingStoreEvent.SetLoading, LOADERS_IDS.GET_TODO_LIST, 'Получение списка задач');
     loadingStore.act(ELoadingStoreEvent.ClearLoading, LOADERS_IDS.CREATE_TASK);
-    const res = await TodoApi.getTodos();
+    const res = await todoApi.getAllTodos();
     todoStore.act(ETodoStoreEvents.SetTodos, res);
     formTarget.reset();
     loadingStore.act(ELoadingStoreEvent.ClearLoading, LOADERS_IDS.GET_TODO_LIST);

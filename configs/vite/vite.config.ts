@@ -51,4 +51,14 @@ export default defineConfig({
       '@': path.join(__dirname, '../../', './src'),
     },
   },
+  server: {
+    proxy: {
+      '/api/todo-service': {
+        target: 'http://localhost:8080',
+        changeOrigin: true,
+        secure: false,
+        rewrite: (path: string): string => path.replace(/^\/api\/todo-service/, ''),
+      },
+    },
+  },
 });
